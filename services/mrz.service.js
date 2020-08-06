@@ -83,7 +83,8 @@ class mrzService{
       nationality : this.getCountry(countries, data['nationality'], 'N'),
       sex : data["sex"].toUpperCase(),
       documentNumber: data["documentNumber"],
-      issuingState : data["issuingState"]
+      issuingState : data["issuingState"],
+      personalNumber: data["personalNumber"]
     }
     return info
   }
