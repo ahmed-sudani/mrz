@@ -38,12 +38,14 @@ class mrzService{
   }
 
   cleanName(name = ""){
+    if(!name)return
     name.trim()
     let ch = name.search(" ")
     return ch != -1 ? name.substring(0, ch + 1).trim() : name.trim()
   }
 
   formaletDate(date = ""){
+    if(!date)return
     return `${date.substr(4, 2)}-${date.substr(2, 2)}-${date.substr(0, 2)}`
   }
 
@@ -56,53 +58,33 @@ class mrzService{
     return names.filter((ele)=>{return ele != ''})
   }
   
-  idRecoginze(mrzLines){
-    return mrz.parse(mrzLines)
+  mrzRecoginze(mrzLines){
+    return mrz.parse(mrzLines).fields
   }
 
-  filterDataPassport(data, mrzLines){
-    let names = this.getNamesFromMrz(mrzLines)
-    let first_name = names[2]
-    let last_name = names[1]
-
+  filterDataId(data, mrzLines = ""){
     let countries = this.readCountriesFile()
-
-    let info = {
-      type : "passport",
-      first_name : this.cleanName(first_name),
-      last_name : this.cleanName(last_name),
-      sex : data['sex'] == 'f' ? 'female': 'male',
-      country : this.getCountry(countries, data['country']),
-      nationality : this.getCountry(countries, data['country'], 'N'),
-      date_of_birth : this.formaletDate(data["date_of_birth"]),
-      date_of_expiry : this.formaletDate(data["expiration_date"]),
-      number : this.filterNumber(data['number']),
-      personal_number : this.filterNumber(data["personal_number"])
+    if(mrzLines){
+      let names = this.getNamesFromMrz(mrzLines)
+      data["firstName"] = names[2]
     }
-
-    return info
-  }
-
-  filterDataId(data){
-    let countries = this.readCountriesFile()
-
-    if(!data["lastName"]){
+    if(!data["lastName"] && !mrzLines){
       let names = data["firstName"].split(" ")
       data["firstName"] = names[0]
       data["lastName"] = names[1]
     }
 
     let info = {
-      type : "id",
+      type : data["documentCode"] == "P" ? "passport" : "id",
       first_name : this.cleanName(data["firstName"]),
       last_name : this.cleanName(data["lastName"]),
       expiration_date : this.formaletDate(data["expirationDate"]),
       date_of_birth : this.formaletDate(data["birthDate"]),
       nationality : this.getCountry(countries, data['nationality'], 'N'),
-      sex : data["sex"],
-      documentNumber: data["documentNumber"]
+      sex : data["sex"].toUpperCase(),
+      documentNumber: data["documentNumber"],
+      issuingState : data["issuingState"]
     }
-
     return info
   }
 
