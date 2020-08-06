@@ -1,6 +1,4 @@
 const mrzService = require('../services/mrz.service');
-const {exec} = require("child_process");
-const mrz = require("mrz");
 
 let fillLine = (line)=>{
     while (line.length < 44) {
@@ -9,7 +7,7 @@ let fillLine = (line)=>{
     return line
 }
 
-module.exports = (req, res, next)=>{
+module.exports = async (req, res, next)=>{
     if(req.mrzLines.length != 2){
         mrzService.clearTemp()
         return next()
@@ -26,7 +24,6 @@ module.exports = (req, res, next)=>{
     let filteredData = mrzService.mrzRecoginze(req.mrzLines)
     filteredData = mrzService.filterDataId(filteredData, req.mrzLines)
 
-    console.log(mrz.parse(req.mrzLines).fields);
     mrzService.clearTemp()
-        return res.json({data : filteredData, message : "data successfuly extracted", response : 200, success : true})
+    return res.json({data : filteredData, message : "data successfuly extracted", response : 200, success : true})
 }
