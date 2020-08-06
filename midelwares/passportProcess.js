@@ -22,7 +22,7 @@ module.exports = async (req, res, next)=>{
     req.mrzLines[1] = req.mrzLines[1].substring(0, 44)
 
     let filteredData = mrzService.mrzRecoginze(req.mrzLines)
-    filteredData = mrzService.filterDataId(filteredData, req.mrzLines)
+    filteredData = mrzService.filterDataId(filteredData, req.mrzLines, "passport")
 
     mrzService.clearTemp()
     return res.json({data : filteredData, message : "data successfuly extracted", response : 200, success : true})
