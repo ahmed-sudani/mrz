@@ -5,7 +5,8 @@ module.exports = (req, res, next)=>{
         req.mrzLines[1] = req.mrzLines[1].substring(0, 30)
         req.mrzLines[2] = req.mrzLines[2].substring(0, 30)
 
-        let data = mrzService.idRecoginze(req.mrzLines).fields
+        let data = mrzService.mrzRecoginze(req.mrzLines)
+        
         let filteredData = mrzService.filterDataId(data)
         
         return res.json({data : filteredData, message : "data successfuly extracted", response : 200, success : true})

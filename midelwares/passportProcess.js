@@ -1,20 +1,32 @@
 const mrzService = require('../services/mrz.service');
 const {exec} = require("child_process");
+const mrz = require("mrz");
+
+let fillLine = (line)=>{
+    while (line.length < 44) {
+        line += "<"
+    }
+    return line
+}
 
 module.exports = (req, res, next)=>{
     if(req.mrzLines.length != 2){
         mrzService.clearTemp()
         return next()
     }
-    exec("mrz --json temp/passport-image.jpg", (error, stdout, stderr)=>{
-        if (error) {
-            mrzService.clearTemp()
-            next({code : 400, message : 'please enter a valid documnet'})
-        } else if(stdout){
-            let data = JSON.parse(stdout)
-            let filteredData = mrzService.filterDataPassport(data, req.mrzLines)
-            mrzService.clearTemp()
-            return res.json({data : filteredData, message : "data successfuly extracted", response : 200, success : true})
-        }
-    })
+    if(req.mrzLines[0].length < 44){
+        req.mrzLines[0] = fillLine(req.mrzLines[0])
+    }
+    if(req.mrzLines[1].length < 44){
+        req.mrzLines[1] = fillLine(req.mrzLines[1])
+    }
+    req.mrzLines[0] = req.mrzLines[0].substring(0, 44)
+    req.mrzLines[1] = req.mrzLines[1].substring(0, 44)
+
+    let filteredData = mrzService.mrzRecoginze(req.mrzLines)
+    filteredData = mrzService.filterDataId(filteredData, req.mrzLines)
+
+    console.log(mrz.parse(req.mrzLines).fields);
+    mrzService.clearTemp()
+        return res.json({data : filteredData, message : "data successfuly extracted", response : 200, success : true})
 }
