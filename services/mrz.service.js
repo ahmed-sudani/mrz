@@ -62,7 +62,7 @@ class mrzService{
     return mrz.parse(mrzLines).fields
   }
 
-  filterDataId(data, mrzLines = ""){
+  filterDataId(data, mrzLines = "", type){
     let countries = this.readCountriesFile()
     if(mrzLines){
       let names = this.getNamesFromMrz(mrzLines)
@@ -75,13 +75,13 @@ class mrzService{
     }
 
     let info = {
-      type : data["documentCode"] == "P" ? "passport" : "id",
+      type : type,
       first_name : this.cleanName(data["firstName"]),
       last_name : this.cleanName(data["lastName"]),
       expiration_date : this.formaletDate(data["expirationDate"]),
       date_of_birth : this.formaletDate(data["birthDate"]),
       nationality : this.getCountry(countries, data['nationality'], 'N'),
-      sex : data["sex"].toUpperCase(),
+      sex : data["sex"],
       documentNumber: data["documentNumber"],
       issuingState : data["issuingState"],
       personalNumber: data["personalNumber"]
