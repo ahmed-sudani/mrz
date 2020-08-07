@@ -1,5 +1,6 @@
 const fs = require('fs');
 const mrz = require('mrz');
+const { count } = require('console');
 class mrzService{
 
   filterString(text = ""){
@@ -41,7 +42,7 @@ class mrzService{
 
   cleanName(name = ""){
     if(!name)return
-    name.trim()
+    name = name.replace(/[0-9]/g, "")
     let ch = name.search(" ")
     return ch != -1 ? name.substring(0, ch + 1).trim() : name.trim()
   }
@@ -96,6 +97,20 @@ class mrzService{
     return line.substring(startIndex, endIndex)
   }
 
+  filterStateFromName(name = "", state = ""){
+    let count = 0
+    name = name.replace(/[0-9]/g, "")
+    for(let i = 0; i < 3; i++){
+      if(name.charAt(i) == state.charAt(i)){
+        count++
+      }
+    }
+    if(count >= 2){
+      return name.substr(3, name.length)
+    }
+    return name
+  }
+
   filterDataId(data, mrzLines = "", type){
     let countries = this.readCountriesFile()
 
@@ -106,7 +121,7 @@ class mrzService{
 
       let names = this.getNamesFromMrz(mrzLines)
       data["firstName"] = names[2]
-      data["lastName"] = names[1].indexOf(data["nationality"]) == -1 ?  names[1] : names[1].substr(3,  names[1].length)
+      data["lastName"] = this.filterStateFromName(names[1] , data['nationality'])
       
       let dates = this.readDates(mrzLines[1])
       data["birthDate"] = dates[0]
