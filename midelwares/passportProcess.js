@@ -24,6 +24,7 @@ module.exports = async (req, res, next)=>{
         let filteredData = mrzService.filterDataId({}, req.mrzLines, "passport")
         return res.json({data : filteredData, message : "data successfuly extracted", response : 200, success : true})   
     } catch (error) {
+        console.log(error);
         next({path : "passport" , code : 400, message : 'please enter a valid documnet'})
     }
 }
