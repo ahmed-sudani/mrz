@@ -30,11 +30,13 @@ class mrzService{
     for(let i = 0; i < countries.length; i++) {
       let element = countries[i]
       if(element["alpha-3"] == countryCode){
-        if(type === "N")
-        element["name"] = element["name"].charAt(element["name"].length - 1) == 'n' ? element["name"] + 'ese' : element["name"] + 'n'
+        if(type == "N"){
+          return element["name"].charAt(element["name"].length - 1) == 'n' ? element["name"] + 'ese' : element["name"] + 'n'
+        }
         return element["name"].trim()
       }
     }
+    return countryCode
   }
 
   cleanName(name = ""){
@@ -62,12 +64,58 @@ class mrzService{
     return mrz.parse(mrzLines).fields
   }
 
+  readCountry(line){
+    let index = line.search(/[a-zA-Z]{3}/)
+    if(index != -1)
+    return line.substr(index, 3)
+  }
+
+  readDocumentNumber(line){
+    return line.substr(0, 9)
+  }
+
+  readGender(line){
+    let index = line.search(/[FM]{1}/)
+    if(index != -1)
+    return line.substr(index, 1)
+  }
+
+  readDates(line){
+    let dates = []
+    let index = line.search(/[a-zA-Z]{3}/) + 3
+    dates[0] = line.substr(index, 6)
+    index = line.search(/[FM]{1}/) + 1
+    dates[1] = line.substr(index, 6)
+    return dates
+  }
+
+  readPersonalNumber(line){
+    let startIndex = line.search(/[FM]{1}/) + 8
+    let endIndex = line.indexOf("<", startIndex)
+    endIndex = endIndex == -1 ? line.length - 2 : endIndex 
+    return line.substring(startIndex, endIndex)
+  }
+
   filterDataId(data, mrzLines = "", type){
     let countries = this.readCountriesFile()
+
     if(mrzLines){
+      
+      data["nationality"] = this.readCountry(mrzLines[1])
+      data["sex"] = this.readGender(mrzLines[1]) == "M" ? "male" : "female"
+
       let names = this.getNamesFromMrz(mrzLines)
       data["firstName"] = names[2]
+      data["lastName"] = names[1].indexOf(data["nationality"]) == -1 ?  names[1] : names[1].substr(3,  names[1].length)
+      
+      let dates = this.readDates(mrzLines[1])
+      data["birthDate"] = dates[0]
+      data["expirationDate"] = dates[1]
+
+      data["documentNumber"] = this.readDocumentNumber(mrzLines[1])
+      data["personalNumber"] = this.readPersonalNumber(mrzLines[1])
     }
+
     if(!data["lastName"] && !mrzLines){
       let names = data["firstName"].split(" ")
       data["firstName"] = names[0]
@@ -81,11 +129,13 @@ class mrzService{
       expiration_date : this.formaletDate(data["expirationDate"]),
       date_of_birth : this.formaletDate(data["birthDate"]),
       nationality : this.getCountry(countries, data['nationality'], 'N'),
+      country : this.getCountry(countries, data['nationality'], "C"),
       sex : data["sex"],
-      documentNumber: data["documentNumber"],
+      documentNumber: this.filterNumber(data["documentNumber"]),
       issuingState : data["issuingState"],
       personalNumber: data["personalNumber"]
     }
+
     return info
   }
 
