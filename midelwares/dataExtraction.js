@@ -9,6 +9,7 @@ let dataExtraction = (req, res, next)=>{
         if(stdout){
           stdout = mrzService.filterString(stdout)
           req.mrzLines = stdout
+          mrzService.clearTemp()
           return next()
         }
     })

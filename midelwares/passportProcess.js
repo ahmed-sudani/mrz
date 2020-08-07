@@ -9,7 +9,6 @@ let fillLine = (line)=>{
 
 module.exports = async (req, res, next)=>{
     if(req.mrzLines.length != 2){
-        mrzService.clearTemp()
         return next()
     }
     if(req.mrzLines[0].length < 44){
@@ -21,9 +20,10 @@ module.exports = async (req, res, next)=>{
     req.mrzLines[0] = req.mrzLines[0].substring(0, 44)
     req.mrzLines[1] = req.mrzLines[1].substring(0, 44)
 
-    let filteredData = mrzService.mrzRecoginze(req.mrzLines)
-    filteredData = mrzService.filterDataId(filteredData, req.mrzLines, "passport")
-
-    mrzService.clearTemp()
-    return res.json({data : filteredData, message : "data successfuly extracted", response : 200, success : true})
+    try {
+        let filteredData = mrzService.filterDataId({}, req.mrzLines, "passport")
+        return res.json({data : filteredData, message : "data successfuly extracted", response : 200, success : true})   
+    } catch (error) {
+        next({path : "passport" , code : 400, message : 'please enter a valid documnet'})
+    }
 }
