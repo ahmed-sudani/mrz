@@ -12,6 +12,7 @@ let dataExtraction = (req, res, next)=>{
           mrzService.clearTemp()
           return next()
         }
+        return next({code : 400, message : "plase enter a valid documnet"})
     })
 }
 
