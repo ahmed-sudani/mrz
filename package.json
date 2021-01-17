@@ -7,6 +7,10 @@
     "test": "mocha",
     "start": "node index"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ahmed-sudani/mrz.git"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -16,8 +20,11 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "helmet": "^4.0.0",
+    "jimp": "^0.16.1",
     "mrz": "^3.1.0",
     "multer": "^1.4.2",
-    "tesseract.js": "^2.1.1"
+    "node-tesseract-ocr": "^2.0.0",
+    "nodemon": "^2.0.4",
+    "tesseract.js": "^2.1.4"
   }
 }
