@@ -9,7 +9,7 @@ import sys
 
 
 def image_to_string():
-    img_path = "./temp/passport-image.jpg"
+    img_path = "./examples/"
     """Convert image to text using tesseract OCR"""
     img = cv2.imread(img_path)
 
@@ -36,7 +36,8 @@ def image_to_string():
     img = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)[1]
     # Save the filtered image in the output directory
     # save_path = os.path.join(output_path, file_name + "_filter.jpg")
-    # cv2.imwrite(save_path, img)
+
+    cv2.imwrite("ahmed.jpg", img)
 
     # Recognize text with tesseract for python
     result = pytesseract.image_to_string(img, lang="ocrb")
