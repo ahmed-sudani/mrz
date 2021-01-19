@@ -6,8 +6,15 @@ const Tesseract = require("node-tesseract-ocr");
 let dataExtraction = (req, res, next) => {
   jimp
     .read(global.rootPath + `/temp/${req.file.originalname + "passport.jpg"}`)
-    .then(function (lenna) {
+    .then((lenna) => {
+      const height = lenna.getHeight();
       lenna
+        .crop(
+          0,
+          Math.round(height * 0.6),
+          lenna.getWidth(),
+          Math.round(height - height * 0.6)
+        )
         .quality(100) // set JPEG quality
         .greyscale()
         // .contrast(1)
@@ -30,7 +37,7 @@ let dataExtraction = (req, res, next) => {
       );
       next();
     })
-    .catch(function (err) {
+    .catch((err) => {
       next({ err, code: 400 });
     });
 };
