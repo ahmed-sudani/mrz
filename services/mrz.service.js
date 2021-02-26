@@ -1,6 +1,6 @@
 const fs = require("fs");
 const mrz = require("mrz");
-const { count } = require("console");
+
 class mrzService {
   filterString(text = "") {
     let textmrz = text.split("\n");
