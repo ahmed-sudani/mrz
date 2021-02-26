@@ -76,7 +76,11 @@ let licenseDataExtraction = (req, res, next) => {
         global.rootPath + `/temp/${req.file.originalname + "license3.jpg"}`
       );
       let licenseService = new LicenseService();
-      res.json(licenseService.filterData(data1, data2, date3, data4));
+      try {
+        res.json(licenseService.filterData(data1, data2, date3, data4));
+      } catch (error) {
+        next({ error });
+      }
     });
 };
 
