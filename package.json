@@ -15,16 +15,19 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "barcode-js": "^13.4.0",
     "child_process": "^1.0.2",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "helmet": "^4.0.0",
     "jimp": "^0.16.1",
+    "moment": "^2.29.1",
     "mrz": "^3.1.0",
     "multer": "^1.4.2",
     "node-tesseract-ocr": "^2.0.0",
     "nodemon": "^2.0.4",
+    "tesseract-ocr": "^1.0.0",
     "tesseract.js": "^2.1.4"
   }
 }

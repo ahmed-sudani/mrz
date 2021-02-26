@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const mrzRoute = require("./routes/mrz.recognize.route");
+const licenseRoute = require("./routes/license.recoginze.route");
 const helmet = require("helmet");
 const cors = require("cors");
 global.rootPath = __dirname;
@@ -18,6 +19,7 @@ app.get("/", (req, res) => {
 });
 
 app.use(mrzRoute);
+app.use(licenseRoute);
 
 //transfare 404 error to error handler
 app.use((req, res, next) => {
