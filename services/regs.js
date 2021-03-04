@@ -6,7 +6,7 @@ module.exports = regs = {
   WEIGHT: /[ ][0-9]{3}[ ]/,
   CLASS: /[A-Z]{1}/,
   DD: /[0-9A-Z]{14,25}/,
-  NAME: /[a-zA-Z]/,
+  NAME: /[A-Z]/,
   GLOBAL: /[-]/,
-  // STATES: /KS/,
+  STATES: /[ ][A-Z]{2}[ ][0-9]/,
 };
