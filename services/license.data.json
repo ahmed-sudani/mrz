@@ -421,7 +421,7 @@
     "gender": [11, "SEX", 0, 1, "GENDER"],
     "address": [9, "EXP", 4, -1, null, -1, -1, true],
     "date_of_exp": [4, "EXP", 0, 8, "DATE", 10],
-    "date_of_issue": [4, "EXP", 0, 8, "DATE", -1, 20],
+    "date_of_issue": [4, "CLASS", 1, 8, "DATE", -1, 20],
     "date_of_birth": [4, "EXP", 1, 8, "DATE"],
     "class": [3, "CLASS", 0, 1, "CLASS"],
     "DD": [12, "DD", 0, 20, "DD"],
@@ -514,7 +514,7 @@
   },
   "OR": {
     "family_name": null,
-    "given_name": [4, "DOB", -1, "NAME"],
+    "given_name": [4, "ISSUE", -2, "NAME"],
     "gender": [9, "SEX", 1, 1, "GENDER"],
     "date_of_issue": [12, "ISSUE", 0, 8, "DATE"],
     "date_of_exp": [9, "EXPIRES", 0, 8, "DATE"],
@@ -580,6 +580,19 @@
     "date_of_birth": [8, "DOB", 0, 8, "DATE"],
     "CLASS": [12, "CLASS ", 0, 1, "CLASS", 2],
     "DD": [2, "DD ", 0, -1, "DD"],
+    "weight": null
+  },
+  "AZ": {
+    "class": [3, "CLASS", 0, 1, "CLASS"],
+    "family_name": [3, "EXP", -4, -1, "NAME"],
+    "given_name": [4, "EXP", -3, -1, "NAME"],
+    "gender": [5, "SEX", 0, 1, "GENDER"],
+    "date_of_birth": [7, "EXP", -5, 8, "DATE"],
+    "date_of_issue": [0, "ISS", 0, 8, "DATE"],
+    "date_of_exp": [2, "EXP", 0, 8, "DATE", 10],
+    "address": [8, "EXP", -2, -1, null, -1, -1, true],
+    "DD": [2, "DD ", 0, -1, "DD"],
+    "id": null,
     "weight": null
   }
 }

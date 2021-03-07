@@ -47,5 +47,6 @@ module.exports = {
     "WA",
     "WY",
     "SD",
+    "AZ",
   ],
 };

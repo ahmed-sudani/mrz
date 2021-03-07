@@ -64,11 +64,12 @@ class LicenseService {
     if (!this.licenseData.state) {
       let address = this.getTextInNextLine([
         0,
-        /[ ][A-Z]{2}[ ][0-9]/,
+        /[A-Z],[ ][A-Z]{2}[ ][0-9]/,
         0,
         -1,
         "STATES",
       ]);
+      console.log(address, "**************8s");
       this.licenseData.state = this.getStateFromAddress(address);
     }
     let license = this.readLicenseFile()[this.licenseData.state];
