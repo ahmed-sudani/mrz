@@ -1,5 +1,6 @@
 const states = require("./states").states;
 const stateCode = require("./states").stateCode;
+const statesAppreviations = require("./states").stateApreviations;
 const regs = require("./regs");
 
 class LicenseService {
@@ -15,7 +16,8 @@ class LicenseService {
         .replace(/[^\w, -]/g, "")
         .trim()
         .toUpperCase();
-      data = data.replace(/-/g, "");
+      data = data.replace(/[-_]/g, "");
+      data = data.replace(/  /g, " ");
       if (
         data &&
         data.length > 3 &&
@@ -60,18 +62,22 @@ class LicenseService {
     this.filteredData.forEach((item) => {
       console.log(item);
     });
-    this.licenseData.state = this.getState(this.filteredData);
+
+    let address = this.getTextInNextLine([
+      0,
+      /[A-Z],[ ][A-Z]{2}[ ][0-9]/,
+      0,
+      -1,
+      "STATES",
+    ]);
+    this.licenseData.state = this.getStateFromAddress(address);
     if (!this.licenseData.state) {
-      let address = this.getTextInNextLine([
-        0,
-        /[A-Z],[ ][A-Z]{2}[ ][0-9]/,
-        0,
-        -1,
-        "STATES",
-      ]);
-      console.log(address, "**************8s");
-      this.licenseData.state = this.getStateFromAddress(address);
+      this.licenseData.state = this.getState(this.filteredData);
+    } else {
+      this.licenseData.state = statesAppreviations[this.licenseData.state];
+      console.log(this.licenseData.state);
     }
+
     let license = this.readLicenseFile()[this.licenseData.state];
     this.licenseData.family_name = this.getTextInNextLine(license.family_name);
     this.licenseData.given_name = this.getTextInNextLine(license.given_name);

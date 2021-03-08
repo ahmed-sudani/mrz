@@ -155,7 +155,7 @@
     "id": null,
     "weight": null
   },
-  "JERSEY": {
+  "NEW JERSEY": {
     "class": [1, "CLASS ", 0, 1, "CLASS"],
     "family_name": [4, "ISS", 1, -1, "NAME"],
     "given_name": [5, "ISS", 2, -1, "NAME"],
@@ -181,7 +181,7 @@
     "id": null,
     "weight": null
   },
-  "RHODE": {
+  "RHODE ISLAND": {
     "class": [1, "CLASS ", 0, 1, "CLASS"],
     "family_name": [4, "EXP", 1, -1, "NAME"],
     "given_name": [5, "EXP", 2, -1, "NAME"],
@@ -207,7 +207,7 @@
     "id": null,
     "weight": null
   },
-  "MEXICO": {
+  "NEW MEXICO": {
     "class": [1, "CLASS", 0, 1, "CLASS"],
     "family_name": [4, "BIRTH", 1, -1, "NAME"],
     "given_name": [5, "BIRTH", 2, -1, "NAME"],
@@ -324,19 +324,7 @@
     "id": null,
     "weight": null
   },
-  "ZO": {
-    "class": [3, "CLASS", 0, 1, "CLASS"],
-    "family_name": [3, "EXP", -4, -1, "NAME"],
-    "given_name": [4, "EXP", -3, -1, "NAME"],
-    "gender": [5, "SEX", 0, 1, "GENDER"],
-    "date_of_birth": [7, "EXP", -5, 8, "DATE"],
-    "date_of_issue": [0, "ISS", 0, 8, "DATE"],
-    "date_of_exp": [2, "EXP", 0, 8, "DATE", 10],
-    "address": [8, "EXP", -2, -1, null, -1, -1, true],
-    "DD": null,
-    "id": null,
-    "weight": null
-  },
+
   "WASHINGTON, DC": {
     "class": [3, "CLASS", 0, 1, "CLASS"],
     "family_name": [5, "ADRESS", -3, -1, "NAME"],
@@ -428,7 +416,7 @@
     "id": null,
     "weight": null
   },
-  "YORK": {
+  "NEW YORK": {
     "family_name": [3, "CLASS", 1, "NAME"],
     "given_name": [4, "CLASS", 2, "NAME"],
     "gender": [9, "SEX", 0, 1, "GENDER"],
@@ -441,7 +429,7 @@
     "weight": null,
     "DD": null
   },
-  "KS": {
+  "KANSAS": {
     "family_name": [3, "SS ", 2, "NAME"],
     "given_name": [4, "SS ", 3, "NAME"],
     "gender": [9, "SEX", 0, 1, "GENDER"],
@@ -453,7 +441,7 @@
     "DD": [2, "DD", 0, -1, "DD"],
     "weight": null
   },
-  "VT": {
+  "VERMONT": {
     "family_name": [3, "CLASS ", 2, "NAME"],
     "given_name": [4, "CLASS", 3, "NAME"],
     "gender": [9, "GENDER", 0, 1, "GENDER"],
@@ -465,7 +453,7 @@
     "DD": [2, "DD", 0, -1, "DD"],
     "weight": null
   },
-  "OH": {
+  "OHIO": {
     "family_name": [3, "CLASS ", 2, "NAME"],
     "given_name": [4, "CLASS", 3, "NAME"],
     "gender": [9, "GENDER", 0, 1, "GENDER"],
@@ -477,7 +465,7 @@
     "DD": [2, "DD", 0, -1, "DD"],
     "weight": null
   },
-  "HI": {
+  "HAWAII": {
     "family_name": [3, "CLASS ", 2, "NAME"],
     "given_name": [4, "CLASS", 3, "NAME"],
     "gender": [9, "GENDER", 0, 1, "GENDER"],
@@ -489,7 +477,7 @@
     "DD": [2, "DD", 0, -1, "DD"],
     "weight": null
   },
-  "CO": {
+  "COLORADO": {
     "family_name": [3, "DOB ", -4, "NAME"],
     "given_name": [4, "DOB", -3, "NAME"],
     "gender": [9, "SEX", 1, 1, "GENDER"],
@@ -500,7 +488,7 @@
     "DD": [2, "DD", 0, -1, "DD"],
     "weight": null
   },
-  "TN": {
+  "TENNESSEE": {
     "family_name": [3, "SEX ", 2, "NAME"],
     "given_name": [4, "SEX", 3, "NAME"],
     "gender": [9, "SEX", 0, 1, "GENDER"],
@@ -512,7 +500,7 @@
     "DD": [2, "DD", 0, -1, "DD"],
     "weight": null
   },
-  "OR": {
+  "OREGON": {
     "family_name": null,
     "given_name": [4, "ISSUE", -2, "NAME"],
     "gender": [9, "SEX", 1, 1, "GENDER"],
@@ -523,7 +511,7 @@
     "DD": [2, "DD", 0, -1, "DD"],
     "weight": null
   },
-  "PA": {
+  "PENNSYLVANIA": {
     "family_name": [3, "ISS ", 1, "NAME"],
     "given_name": [4, "ISS", 2, "NAME"],
     "gender": [9, "SEX", 0, 1, "GENDER"],
@@ -546,19 +534,19 @@
     "DD": [2, "DD", 0, -1, "DD"],
     "weight": null
   },
-  "WA": {
-    "family_name": [3, "ISS ", 1, "NAME"],
-    "given_name": [4, "ISS", 2, "NAME"],
+  "WASHINGTON": {
+    "family_name": [3, "WASHINGTON ", 2, "NAME"],
+    "given_name": [4, "WASHINGTON", 3, "NAME"],
     "gender": [9, "BIRTH", -1, 1, "GENDER"],
-    "date_of_issue": [12, "BIRTH", 1, 8, "DATE", -1, 10],
-    "date_of_exp": [9, "ISS", 0, 8, "DATE", -1, 15],
-    "address": [5, "BIRTH", -4, -1, null, -1, -1, true],
-    "date_of_birth": [8, "BIRTH", 1, 8, "DATE", 8],
+    "date_of_issue": [12, "WASHINGTON", 4, 8, "DATE", 15],
+    "date_of_exp": [9, "EXP", 0, 8, "DATE"],
+    "address": [5, "WASHINGTON", 5, -1, null, -1, -1, true],
+    "date_of_birth": [8, "WASHINGTON", 4, 8, "DATE", -1, 20],
     "CLASS": [12, "CLASS", 0, 1, "CLASS"],
     "DD": [2, "DD", 0, -1, "DD"],
     "weight": null
   },
-  "WY": {
+  "WYOMING": {
     "family_name": [3, "DOB ", -4, -1, "NAME"],
     "given_name": [4, "DOB ", -3, -1, "NAME"],
     "gender": [9, "SEX", 1, 1, "GENDER"],
@@ -570,7 +558,7 @@
     "DD": [2, "DD", 0, -1, "DD"],
     "weight": null
   },
-  "SD": {
+  "SOUTH DAKOTA": {
     "family_name": [3, "DRIVER LICENSE ", 1, -1, "NAME"],
     "given_name": [4, "DRIVER LICENSE ", 2, -1, "NAME"],
     "gender": [9, "SEX", 1, 1, "GENDER"],
@@ -582,7 +570,7 @@
     "DD": [2, "DD ", 0, -1, "DD"],
     "weight": null
   },
-  "AZ": {
+  "ARIZONA": {
     "class": [3, "CLASS", 0, 1, "CLASS"],
     "family_name": [3, "EXP", -4, -1, "NAME"],
     "given_name": [4, "EXP", -3, -1, "NAME"],
@@ -591,6 +579,19 @@
     "date_of_issue": [0, "ISS", 0, 8, "DATE"],
     "date_of_exp": [2, "EXP", 0, 8, "DATE", 10],
     "address": [8, "EXP", -2, -1, null, -1, -1, true],
+    "DD": [2, "DD ", 0, -1, "DD"],
+    "id": null,
+    "weight": null
+  },
+  "WEST VIRGINIA": {
+    "class": [3, "CLASS", 0, 1, "CLASS"],
+    "family_name": [3, "DRIVERS LICENSE", 4, -1, "NAME"],
+    "given_name": [4, "DRIVERS LICENSE", 5, -1, "NAME"],
+    "gender": [5, "SEX", 0, 1, "GENDER"],
+    "date_of_birth": [7, "DRIVERS LICENSE", 3, 8, "DATE"],
+    "date_of_issue": [0, "SEX", 0, 8, "DATE"],
+    "date_of_exp": [2, "DRIVERS LICENSE", 2, 8, "DATE", 10],
+    "address": [8, "DRIVERS LICENSE", 6, -1, null, -1, -1, true],
     "DD": [2, "DD ", 0, -1, "DD"],
     "id": null,
     "weight": null
