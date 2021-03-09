@@ -1,5 +1,5 @@
 {
-  "MARY": {
+  "MARYLAND": {
     "family_name": [7, "FAMILY", 1, -1, "NAME"],
     "given_name": [9, "GIVEN", 1, -1, "NAME"],
     "gender": [12, "DATE OF EXP", 1, 1, "GENDER"],
@@ -344,10 +344,10 @@
     "given_name": [9, "DD", 2, -1, "NAME"],
     "address": [10, "DD", 3, -1, null, -1, -1, true],
     "gender": [4, "SEX", 0, 1, "GENDER"],
-    "date_of_birth": [2, "DOB", 0, 8, "DATE"],
-    "date_of_issue": [4, "DD", -2, 8, "DATE"],
-    "date_of_exp": [3, "EXP", 0, 8, "DATE"],
-    "DD": [6, "DD", 0, 18, "DD"],
+    "date_of_birth": [2, "SEX", -2, 8, "DATE"],
+    "date_of_issue": [4, "SEX", 0, 8, "DATE", -1, 15],
+    "date_of_exp": [3, "SEX", -1, 8, "DATE"],
+    "DD": [6, "DD", 0, -1, "DD"],
     "id": null,
     "weight": null
   },
@@ -430,13 +430,13 @@
     "DD": null
   },
   "KANSAS": {
-    "family_name": [3, "SS ", 2, "NAME"],
-    "given_name": [4, "SS ", 3, "NAME"],
+    "family_name": [3, "KANSAS ", 3, "NAME"],
+    "given_name": [4, "KANSAS ", 4, "NAME"],
     "gender": [9, "SEX", 0, 1, "GENDER"],
-    "date_of_issue": [12, "SS ", 0, 8, "DATE"],
-    "date_of_exp": [9, "SS", 1, 8, "DATE", 15],
-    "address": [5, "SS ", 4, -1, null, -1, -1, true],
-    "date_of_birth": [8, "DD", -2, 8, "DATE"],
+    "date_of_issue": [12, "KANSAS ", 1, 8, "DATE", 10],
+    "date_of_exp": [9, "EXP", 0, 8, "DATE"],
+    "address": [5, "EXP ", 3, -1, null, -1, -1, true],
+    "date_of_birth": [8, "KANSAS", 2, 8, "DATE", -1, 15],
     "class": [2, "CLASS", 0, 1, "CLASS"],
     "DD": [2, "DD", 0, -1, "DD"],
     "weight": null
@@ -522,7 +522,7 @@
     "DD": [2, "DD", 0, -1, "DD"],
     "weight": null
   },
-  "HAMPSHIRE": {
+  "NEW HAMPSHIRE": {
     "family_name": [3, "FAMILY ", 1, "NAME"],
     "given_name": [4, "FAMILY", 3, "NAME"],
     "gender": [9, "SEX", 1, 1, "GENDER"],

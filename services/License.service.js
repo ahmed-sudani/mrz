@@ -1,5 +1,3 @@
-const states = require("./states").states;
-const stateCode = require("./states").stateCode;
 const statesAppreviations = require("./states").stateApreviations;
 const regs = require("./regs");
 
@@ -13,10 +11,9 @@ class LicenseService {
     for (let i = 0; i < arr.length; i++) {
       let data = arr[i];
       data = data
-        .replace(/[^\w, -]/g, "")
+        .replace(/[^\w ]|[_]/g, "")
         .trim()
         .toUpperCase();
-      data = data.replace(/[-_]/g, "");
       data = data.replace(/  /g, " ");
       if (
         data &&
@@ -29,54 +26,28 @@ class LicenseService {
     }
     return result;
   }
-
-  sort(data = this.filteredData) {
-    let swaped = true;
-    for (let i = 0; i < data.length && swaped; i++) {
-      swaped = false;
-      for (let j = 0; j < data.length - 1; j++) {
-        if (!data[j] || data[i].length > 16) {
-          data.splice(j, 1);
-          continue;
-        }
-        if (!data[j + 1]) {
-          data.splice(j + 1, 1);
-          continue;
-        }
-        if (data[j].length < data[j + 1].length) {
-          swaped = true;
-          let temp = data[j];
-          data[j] = data[j + 1];
-          data[j + 1] = temp;
-        }
-      }
-    }
-  }
-
   filterData(...data) {
     for (let i = data.length - 1; i >= 0; i--) {
       const item = data[i];
       this.filteredData.push(this.filterArray(item.split("\n")));
     }
-    this.sort();
     this.filteredData.forEach((item) => {
       console.log(item);
     });
 
-    let address = this.getTextInNextLine([
+    this.licenseData.state = this.getTextInNextLine([
       0,
-      /[A-Z],[ ][A-Z]{2}[ ][0-9]/,
+      regs.STATES,
       0,
-      -1,
-      "STATES",
+      3,
+      "STATE",
     ]);
-    this.licenseData.state = this.getStateFromAddress(address);
-    if (!this.licenseData.state) {
-      this.licenseData.state = this.getState(this.filteredData);
-    } else {
-      this.licenseData.state = statesAppreviations[this.licenseData.state];
-      console.log(this.licenseData.state);
-    }
+    if (this.licenseData.state) {
+      this.licenseData.state = this.licenseData.state.trim();
+    } else return;
+    console.log(this.licenseData.state, "***********");
+    this.licenseData.state = statesAppreviations[this.licenseData.state];
+    console.log(this.licenseData.state);
 
     let license = this.readLicenseFile()[this.licenseData.state];
     this.licenseData.family_name = this.getTextInNextLine(license.family_name);
@@ -141,23 +112,13 @@ class LicenseService {
     let resultText,
       usedLineIndex = lineIndex;
 
-    for (let i = 0; i < data.length; i++) {
-      const element = data[i];
+    for (let dataIndex = 0; dataIndex < data.length; dataIndex++) {
+      const element = data[dataIndex];
       usedLineIndex = this.getWordLineIndex(element, expectedWordToSearchNear);
       if (usedLineIndex != -1) {
-        this.wordsToSearchNear[expectedWordToSearchNear] = {
-          dataIndex: i,
-          dataLine: usedLineIndex,
-        };
-        let { dataIndex, dataLine } = this.wordsToSearchNear[
-          expectedWordToSearchNear
-        ];
-        dataLine += addToWordLineIndex;
-        if (dataIndex < 0 || dataLine < 0) {
-          continue;
-        }
+        usedLineIndex += addToWordLineIndex;
         resultText = this.substring(
-          data[dataIndex][dataLine],
+          data[dataIndex][usedLineIndex],
           regex,
           textLength,
           minIndex,
@@ -167,8 +128,8 @@ class LicenseService {
         if (!resultText) {
           continue;
         }
-        if (nextLineIncluded) {
-          resultText += " " + data[dataIndex][dataLine + 1].substr(0);
+        if (nextLineIncluded && data[dataIndex][usedLineIndex + 1]) {
+          resultText += " " + data[dataIndex][usedLineIndex + 1].substr(0);
         }
         return resultText;
       }
@@ -230,28 +191,6 @@ class LicenseService {
     return (
       text.substr(0, 2) + "-" + text.substr(2, 2) + "-" + text.substr(4, 4)
     );
-  }
-  getStateFromAddress(line = "") {
-    for (let i = 0; i < states.length; i++) {
-      const state = stateCode[i];
-      if (this.indexFound(line.replace(" ", ""), state)) {
-        return state;
-      }
-    }
-  }
-  getState(data = [""]) {
-    for (let i = 0; i < states.length; i++) {
-      const state = states[i];
-      for (let j = 0; j < data.length; j++) {
-        const line = data[j];
-        if (
-          this.indexFound(line[0].replace(" ", ""), state) ||
-          this.indexFound(line[1].replace(" ", ""), state)
-        ) {
-          return state;
-        }
-      }
-    }
   }
 }
 
