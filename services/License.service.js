@@ -26,17 +26,31 @@ class LicenseService {
     }
     return result;
   }
+
+  sortArray(arr = [[""]]) {
+    for (let i = 0; i < arr.length - 1; i++) {
+      for (let j = 0; j < arr.length - 1; j++) {
+        if (arr[j].length < arr[j + 1].length) {
+          let temp = arr[j];
+          arr[j] = arr[j + 1];
+          arr[j + 1] = temp;
+        }
+      }
+    }
+  }
+
   filterData(...data) {
     for (let i = data.length - 1; i >= 0; i--) {
       const item = data[i];
       this.filteredData.push(this.filterArray(item.split("\n")));
     }
+    this.sortArray(this.filteredData);
+
     this.filteredData.forEach((item) => {
       console.log(item);
     });
 
     this.licenseData.state = this.getTextInNextLine([
-      0,
       regs.STATES,
       0,
       3,
@@ -44,7 +58,7 @@ class LicenseService {
     ]);
     if (this.licenseData.state) {
       this.licenseData.state = this.licenseData.state.trim();
-    } else return;
+    } else throw new Error("wrong document");
     console.log(this.licenseData.state, "***********");
     this.licenseData.state = statesAppreviations[this.licenseData.state];
     console.log(this.licenseData.state);
@@ -101,16 +115,14 @@ class LicenseService {
     if (!props) {
       return;
     }
-    let lineIndex = props[0] ? props[0] : 0,
-      expectedWordToSearchNear = props[1] ? props[1] : "",
-      addToWordLineIndex = props[2],
-      textLength = props[3] ? props[3] : 0,
-      regex = regs[props[4]],
-      minIndex = props[5],
-      maxIndex = props[6],
-      nextLineIncluded = props[7];
-    let resultText,
-      usedLineIndex = lineIndex;
+    let expectedWordToSearchNear = props[0] ? props[0] : "",
+      addToWordLineIndex = props[1],
+      textLength = props[2] ? props[2] : 0,
+      regex = regs[props[3]],
+      minIndex = props[4],
+      maxIndex = props[5],
+      nextLineIncluded = props[6];
+    let resultText, usedLineIndex;
 
     for (let dataIndex = 0; dataIndex < data.length; dataIndex++) {
       const element = data[dataIndex];
